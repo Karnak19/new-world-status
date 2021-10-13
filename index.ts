@@ -19,7 +19,7 @@ cron("*/10 * * * * *", async () => {
   if (prevStatus !== newStatus) {
     const embed = new RichEmbed(
       "Kaloon status",
-      serverStatus.getStatus("kaloon").toUppercase()
+      serverStatus.getStatus("kaloon")
     );
 
     webhook.post(embed);
