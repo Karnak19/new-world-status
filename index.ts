@@ -1,10 +1,11 @@
+import "https://deno.land/x/dotenv/load.ts";
+
+import { WEBHOOK_URL } from "./env.ts";
 import { cron, Webhook, RichEmbed } from "./package.ts";
 
 import serverStatus from "./servers.ts";
 
-const webhook = new Webhook(
-  "https://discord.com/api/webhooks/897858907588952074/uEsmgP-tYRKL9TXz8bwQAt76kX9bkRwwRphF5XvJTwB_1o9DD0HtCm2WI-_DouzK6ngu"
-);
+const webhook = new Webhook(WEBHOOK_URL as string);
 
 console.log("STARTING SERVER");
 let prevStatus: string;
@@ -18,7 +19,7 @@ cron("*/10 * * * * *", async () => {
   if (prevStatus !== newStatus) {
     const embed = new RichEmbed(
       "Kaloon status",
-      "statut: " + serverStatus.getStatus("kaloon")
+      serverStatus.getStatus("kaloon").toUppercase()
     );
 
     webhook.post(embed);
