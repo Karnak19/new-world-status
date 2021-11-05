@@ -1,6 +1,6 @@
 import "https://deno.land/x/dotenv/load.ts";
 
-import { WEBHOOK_URL } from "./env.ts";
+import { WEBHOOK_URL, SERVER } from "./env.ts";
 import { cron, Webhook, RichEmbed } from "./package.ts";
 
 import serverStatus from "./servers.ts";
@@ -11,15 +11,15 @@ console.log("STARTING SERVER");
 let prevStatus: string;
 
 // every 10 seconds job
-cron("*/10 * * * * *", async () => {
+cron("*/20 * * * * *", async () => {
   serverStatus.updateStatuses(await serverStatus.scrapPage());
 
-  const newStatus = serverStatus.getStatus("kaloon");
+  const newStatus = serverStatus.getStatus(SERVER);
 
   if (prevStatus !== newStatus) {
     const embed = new RichEmbed(
-      "Kaloon status",
-      serverStatus.getStatus("kaloon")
+      `${SERVER} status`,
+      serverStatus.getStatus(SERVER)
     );
 
     webhook.post(embed);
