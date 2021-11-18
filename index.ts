@@ -16,6 +16,8 @@ cron("*/20 * * * * *", async () => {
 
   const newStatus = serverStatus.getStatus(SERVER);
 
+  console.log(`Current ${SERVER} status ->>`, newStatus);
+
   if (prevStatus !== newStatus) {
     const embed = new RichEmbed(
       `${SERVER} status`,

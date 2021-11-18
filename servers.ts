@@ -6,7 +6,7 @@ import { sanitizer } from "./sanitizer.ts";
 class ServerStatus {
   private readonly SERVERS = new Map();
   private readonly SELECTOR =
-    "div.ags-ServerStatus-content-responses-response:nth-child(3)div.ags-ServerStatus-content-responses-response > div.ags-ServerStatus-content-responses-response-server";
+    "div.ags-ServerStatus-content-responses-response:nth-child(4)div.ags-ServerStatus-content-responses-response > div.ags-ServerStatus-content-responses-response-server";
 
   getStatus(server: string) {
     return this.SERVERS.get(server);
